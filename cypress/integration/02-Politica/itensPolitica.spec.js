@@ -3,8 +3,8 @@ describe('Itens da política', () => {
         cy.session('login', () => {
             cy.visit('/')
 
-            cy.get('#field-email').type('admin@forpdi.org')
-            cy.get('#field-password').type('12345')
+            cy.get('#field-email').type(Cypress.env('emailLogin'))
+            cy.get('#field-password').type(Cypress.env('senhaLogin'))
             cy.get('.btn').click()
         })
     });
@@ -43,7 +43,6 @@ describe('Itens da política', () => {
 
         cy.get('.btn-success').click()
         cy.contains('Existem erros no formulário').should('be.visible')
-
     });
 
     it('Novo item com vários campos de texto', () => {
@@ -85,7 +84,6 @@ describe('Itens da política', () => {
         cy.contains('Segundo item de texto').should('be.visible')
         cy.contains('Terceiro item de texto').should('be.visible')
         cy.contains('Quarto item de texto').should('be.visible')
-
     });
 
     it('Editando título do item', () => {
@@ -105,8 +103,8 @@ describe('Itens da política', () => {
         cy.get('.fpdi-card').contains('Editado e vai ser excluído').should('be.visible')
         cy.reload() //NÃO É O IDEAL
         cy.get('.fpdi-tabs-content > .fpdi-tabs').contains('Editado e vai ser excluído').should('be.visible')
-
     });
+
     it('Excluindo item', () => {
         cy.visit('/')
 
@@ -117,7 +115,6 @@ describe('Itens da política', () => {
         cy.get('h1 > .dropdown > .dropdown-toggle > .mdi').click() //abrir menu dropdown
         cy.get(':nth-child(2) > a > .mdi > #menu-levels > .fpdi-nav-label').click() //clicar em excluir
         cy.get('.btn-success').click() //confirmar
-
     });
 
     it('Imagem no campo de texto', () => {
@@ -138,8 +135,6 @@ describe('Itens da política', () => {
 
         cy.get('.mdi-check').click()
         cy.get('.btn-success').click()
-
-        //cy.get('.mdi-check').click()// Primeiro botão de salvar
     });
 
     const data = require('../fixtures/data')
@@ -169,7 +164,6 @@ describe('Itens da política', () => {
             cy.contains('Item salvo com sucesso').should('be.visible')
 
             cy.get('.fpdi-card').contains(item.arquivo).should('be.visible')
-
         });
     });
 })

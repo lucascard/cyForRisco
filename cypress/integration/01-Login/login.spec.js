@@ -28,14 +28,13 @@ describe('Login', () => {
         cy.visit('/')
         cy.get('.btn').click()
         
-        cy.contains('Por favor, digite seu nome de usuário e sua senha').should('be.visible')
-        
+        cy.contains('Por favor, digite seu nome de usuário e sua senha').should('be.visible') 
     });
 
     it('Login com sucesso', () => {
         cy.visit('/')
-        cy.get('#field-email').type('admin@forpdi.org')
-        cy.get('#field-password').type('12345')
+        cy.get('#field-email').type(Cypress.env('emailLogin'))
+        cy.get('#field-password').type(Cypress.env('senhaLogin'))
         cy.get('.btn').click()
 
         cy.get('.app-select > :nth-child(1) > img').should('be.visible')
@@ -69,6 +68,5 @@ describe('Login', () => {
         cy.get('.modal-footer > .btn').click()
 
         cy.contains('Login').should('be.visible')
-       
     });
 });
